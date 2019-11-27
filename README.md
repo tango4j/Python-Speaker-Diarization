@@ -1,5 +1,5 @@
 # Auto Tuning Spectral Clustering
-Python3 code for the IEEE SPL paper "Auto-Tuning Spectral Clustering for SpeakerDiarization Using Normalized Maximum Eigengap"
+Python3 code for the IEEE SPL paper ["Auto-Tuning Spectral Clustering for SpeakerDiarization Using Normalized Maximum Eigengap"](https://drive.google.com/file/d/1CdEJPrpW6pRCObrppcZnw0_hRwWIHxi8/view?usp=sharing)
 
 ## DER Leaderboards
 
