@@ -36,7 +36,7 @@ Track 1: Oracle VAD (Full DH2019 Dev set)
 | JHU, 2017, Garcia-Romero [1] (t1, Oracle SAD)               |        | -      | 12.8 %   | 9.9%  |
 | Google, 2018, Quan Wang, d-vector + Spectral Clustering [3] | 18.8%  | -      | 12.0%    | -     |
 | Google, 2019, Fully Supervised [4]                          | -      | -      | 7.6%     | -     |
-| __Auto-Tuning NMESC [A1]__                                   | 14.14% |   -    | 7.24%    | -     |  
+| __Auto-Tuning NMESC [A1]__                                   | 7.24% |   -    | -        | -     |  
 
 
 ### **AMI meeting corpora**
