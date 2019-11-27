@@ -30,9 +30,9 @@ Track 2: System VAD (Full DH2019 Dev set)
 
 Collar 0.25, No overlap for evaluation  
 Track 1: Oracle VAD
-| System and Error | Total Error: Before Reseg | Total Error: After Reseg  | Speaker Error: Before Reseg | Speaker Error: After Reseg|
+| System and Error | DER = Speaker Error: Before Reseg | DER = Speaker Error: After Reseg|
 | --------------------------------------------------------------- |:------:|:------:|:--------:|:-----:|
-| Callhome Diarization Xvector Model [Link](https://david-ryan-snyder.github.io/2018/05/04/model_callhome_diarization_v2.html)                           | 8.39%  | -      |
+| Callhome Diarization Xvector Model [6]                       | 8.39%  | -      |
 | __Auto-Tuning NMESC [A1]__                                   | 7.24%  | -      |  
 
 
@@ -99,3 +99,4 @@ Track 1: Oracle VAD (Full DH2019 Dev set)
 
 [5] [Speaker Diarization Using Convolutional Neural Network for Statistics Accumulation Refinement](https://www.isca-speech.org/archive/Interspeech_2017/pdfs/0051.PDF) - IBM's diarization paper that is tested on Callhome American English (LDC97S42) with CH-109 subset(2-speaker subset).
 
+[6] [Kaldi-Callhome Diarization Xvector Model](https://david-ryan-snyder.github.io/2018/05/04/model_callhome_diarization_v2.html) 
