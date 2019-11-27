@@ -3,40 +3,19 @@ Python3 code for the IEEE SPL paper "Auto-Tuning Spectral Clustering for Speaker
 
 ## DER Leaderboards
 
-#### **DIHARD 2019 Dev Set**
-192 Sessions  
 
-No collar for evalutation  
-Overlap regions are also evaluated  
-  
-Track 1: Oracle VAD (Full DH2019 Dev set) 
-Full dev set  
-  
-| System and Error | Total Error: Before Reseg | Total Error: After Reseg  | Speaker Error: Before Reseg | Speaker Error: After Reseg|
-| ---------------------------------------------------------------|:------:|:------:|:--------:|:----:|
-| __DiHard 2019 Baseline (JHU), (t1, test-set_opt, thres -0.03)__           | 24.24% | -      | 13.5%   | -     |
-| USC t2D02_ahc_plda (_test-set opt._, thres +0.07)                         | 30.02% | 36.97% | 19.1%   | 16.1% |
-
-Track 2: System VAD (Full DH2019 Dev set)  
-
-| System and Error | Total Error: Before Reseg | Total Error: After Reseg  | Speaker Error: Before Reseg | Speaker Error: After Reseg|
-| ---------------------------------------------------------------|:------:|:------:|:--------:|:----:|
-| __t2:DiHard 2019 Baseline (JHU) (t2, system SAD)__                     | -      | -     | -     | -     |
-| USC t2D02_ahc_plda (_test-set opt._, thres -0.2)                       | 46.95% | 47.1% | 15.7% | 14.9% |
-| USC t2D03_spt_cos (_test-set opt._, RP thres 0.08 for cos. sim. value) | -      | -     | -     | -     |   
-
-
-#### **NIST SRE 2000 CALLHOME Disk-8(LDC2001S97)**
+#### **1.NIST SRE 2000 CALLHOME Disk-8(LDC2001S97)**
 
 Collar 0.25, No overlap for evaluation  
-Track 1: Oracle VAD  
+## Track 1: Oracle VAD  
 
 | System and Error | DER,Speaker Error: Before Reseg | DER,Speaker Error: After Reseg |
 | -------------------------------------------------------------|:------:|:------:|
 | Callhome Diarization Xvector Model [6]                       | 8.39%  | -      |
-| __Auto-Tuning NMESC [A1]__                                   | 7.24%  | -      |   
+| __Auto-Tuning NMESC [A1]__                                   | 7.29%  | -      |  
+| __Auto-Tuning NMESC Implemented spectral_opt.py__            | 7.24%  | -      |   
 
-Track 2: System VAD  
+## Track 2: System VAD  
 
 | System and Error | Total Error: Before Reseg | Total Error: After Reseg  | Speaker Error: Before Reseg | Speaker Error: After Reseg|
 | ------------------------------------------------------------|:------:|:------:|:--------:|:-----:|
@@ -44,6 +23,29 @@ Track 2: System VAD
 | Google, 2018, Quan Wang, d-vector + Spectral Clustering [3] | 18.8%  | -      | 12.0%    | -     |
 | Google, 2019, Fully Supervised [4]                          | -      | -      | 7.6%     | -     |
 | __Auto-Tuning NMESC [A1]__                                  | 11.73% |   -    | 5.41%    | -     |   
+
+#### **2. DIHARD 2019 Dev Set**
+192 Sessions  
+
+No collar for evalutation  
+Overlap regions are also evaluated  
+  
+## Track 1: Oracle VAD (Full DH2019 Dev set) 
+Full dev set  
+  
+| System and Error | Total Error: Before Reseg | Total Error: After Reseg  | Speaker Error: Before Reseg | Speaker Error: After Reseg|
+| ---------------------------------------------------------------|:------:|:------:|:--------:|:----:|
+| __DiHard 2019 Baseline (JHU), (t1, test-set_opt, thres -0.03)__           | 24.24% | -      | 13.5%   | -     |
+| USC t2D02_ahc_plda (_test-set opt._, thres +0.07)                         | 30.02% | 36.97% | 19.1%   | 16.1% |
+
+## Track 2: System VAD (Full DH2019 Dev set)  
+
+| System and Error | Total Error: Before Reseg | Total Error: After Reseg  | Speaker Error: Before Reseg | Speaker Error: After Reseg|
+| ---------------------------------------------------------------|:------:|:------:|:--------:|:----:|
+| __t2:DiHard 2019 Baseline (JHU) (t2, system SAD)__                     | -      | -     | -     | -     |
+| USC t2D02_ahc_plda (_test-set opt._, thres -0.2)                       | 46.95% | 47.1% | 15.7% | 14.9% |
+| USC t2D03_spt_cos (_test-set opt._, RP thres 0.08 for cos. sim. value) | -      | -     | -     | -     |   
+
 
 
 ### **AMI meeting corpora**
@@ -88,6 +90,8 @@ Track 1: Oracle VAD (Full DH2019 Dev set)
 | __Google, 2018, Quan Wang, d-vector + Spectral Clustering [3]__| 12.30% | -      | 3.76%    | -    |
 | t2B02 (test-set-optimized threshold: -0.09)                | -      | -      | -        | -    |
 | t2C01 (test-set-optimized threshold:  0.44)                | -      | -      | -        | -    |  
+
+[A1] [Auto-Tuning Spectral Clustering for SpeakerDiarization Using Normalized Maximum Eigengap](https://drive.google.com/file/d/1CdEJPrpW6pRCObrppcZnw0_hRwWIHxi8/view?usp=sharing)
 
 [1] [SPEAKER DIARIZATION USING DEEP NEURAL NETWORK EMBEDDINGS](https://www.danielpovey.com/files/2017_icassp_diarization_embeddings.pdf) - 9.9% DER on NIST SRE 2000 CH 
 
