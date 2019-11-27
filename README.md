@@ -36,7 +36,7 @@ Track 1: Oracle VAD (Full DH2019 Dev set)
 | JHU, 2017, Garcia-Romero [1] (t1, Oracle SAD)               |        | -      | 12.8 %   | 9.9%  |
 | Google, 2018, Quan Wang, d-vector + Spectral Clustering [3] | 18.8%  | -      | 12.0%    | -     |
 | Google, 2019, Fully Supervised [4]                          | -      | -      | 7.6%     | -     |
-| __Auto-Tuning NMESC [5]__                                   | 14.14% |   -    | 7.24%    | -     |  
+| __Auto-Tuning NMESC [A1]__                                   | 14.14% |   -    | 7.24%    | -     |  
 
 
 ### **AMI meeting corpora**
@@ -82,4 +82,14 @@ Track 1: Oracle VAD (Full DH2019 Dev set)
 | __Google, 2018, Quan Wang, d-vector + Spectral Clustering [3]__| 12.30% | -      | 3.76%    | -    |
 | t2B02 (test-set-optimized threshold: -0.09)                | -      | -      | -        | -    |
 | t2C01 (test-set-optimized threshold:  0.44)                | -      | -      | -        | -    |  
+
+[1] [SPEAKER DIARIZATION USING DEEP NEURAL NETWORK EMBEDDINGS](https://www.danielpovey.com/files/2017_icassp_diarization_embeddings.pdf) - 9.9% DER on NIST SRE 2000 CH 
+
+[2] [Priors for Speaker Counting and Diarization with AHC](https://engineering.jhu.edu/hltcoe/wp-content/uploads/sites/92/2016/10/Sell_McCree_Garcia-Romero_2016A.pdf) - Speaker prior method that is applied in [1]
+
+[3] [SPEAKER DIARIZATION WITH LSTM](https://arxiv.org/pdf/1710.10468.pdf) - Google's 2018 Result with 12.0% DER on NIST SRE 2000 CH
+
+[4] [FULLY SUPERVISED SPEAKER DIARIZATION](https://arxiv.org/pdf/1810.04719.pdf) - Google's latest result with 7.6% DER on NIST SRE 2000 CH (SoTA)
+
+[5] [Speaker Diarization Using Convolutional Neural Network for Statistics Accumulation Refinement](https://www.isca-speech.org/archive/Interspeech_2017/pdfs/0051.PDF) - IBM's diarization paper that is tested on Callhome American English (LDC97S42) with CH-109 subset(2-speaker subset).
 
