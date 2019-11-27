@@ -29,20 +29,21 @@ Track 2: System VAD (Full DH2019 Dev set)
 #### **NIST SRE 2000 CALLHOME Disk-8(LDC2001S97)**
 
 Collar 0.25, No overlap for evaluation  
-Track 1: Oracle VAD
+Track 1: Oracle VAD  
+
 | System and Error | DER,Speaker Error: Before Reseg | DER,Speaker Error: After Reseg |
 | -------------------------------------------------------------|:------:|:------:|
 | Callhome Diarization Xvector Model [6]                       | 8.39%  | -      |
-| __Auto-Tuning NMESC [A1]__                                   | 7.24%  | -      |  
+| __Auto-Tuning NMESC [A1]__                                   | 7.24%  | -      |   
 
+Track 2: System VAD  
 
-Track 2: System VAD
 | System and Error | Total Error: Before Reseg | Total Error: After Reseg  | Speaker Error: Before Reseg | Speaker Error: After Reseg|
-| --------------------------------------------------------------- |:------:|:------:|:--------:|:-----:|
+| ------------------------------------------------------------|:------:|:------:|:--------:|:-----:|
 | JHU, 2017, Garcia-Romero [1] (t1, Oracle SAD)               |        | -      | 12.8 %   | 9.9%  |
 | Google, 2018, Quan Wang, d-vector + Spectral Clustering [3] | 18.8%  | -      | 12.0%    | -     |
 | Google, 2019, Fully Supervised [4]                          | -      | -      | 7.6%     | -     |
-| __Auto-Tuning NMESC [A1]__                                   | 11.73% |   -    | 5.41%        | -     |  
+| __Auto-Tuning NMESC [A1]__                                  | 11.73% |   -    | 5.41%    | -     |   
 
 
 ### **AMI meeting corpora**
@@ -56,7 +57,6 @@ Track 1: Oracle VAD (Full DH2019 Dev set)
 | USC t2C01 (test-set-optimized threshold:  0.44)         | -      | -      | -        | -    |  
 
 
-
 #### **callhome American English (LDC97S42 + LDC97T14) Evaluation**
 
 Collar 0.25, No overlap for evaluation  
@@ -68,7 +68,7 @@ Track 1: Oracle VAD (Full DH2019 Dev set)
 | ---------------------------------------------------------------|:------:|:------:|:------:|:-----:|
 | __Google, 2018, Quan Wang, d-vector + Spectral Clustering [3]__| 12.54% | -      | 5.97%  | -     |
 | __IBM, 2017, Zbyněk Zajíc [5]__                                | -      | -      | 7.84%  | -     |
-| t2D02_spt_plda (KNOWN # of spks, LLR th 0.0 for raw PLDA)       | 5.61%  | 5.41%  | 1.3%   | 0.7%  |  
+| t2D02_spt_plda (KNOWN # of spks, LLR th 0.0 for raw PLDA)      | 5.61%  | 5.41%  | 1.3%   | 0.7%  |  
 
 
 - __CH-Eval__ (Eval set from corpora, speakers >= 2, test condition:unknown number of condition)  
