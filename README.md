@@ -91,6 +91,7 @@ Track 1: Oracle VAD (Full DH2019 Dev set)
 | t2B02 (test-set-optimized threshold: -0.09)                | -      | -      | -        | -    |
 | t2C01 (test-set-optimized threshold:  0.44)                | -      | -      | -        | -    |  
 
+
 [A1] [Auto-Tuning Spectral Clustering for SpeakerDiarization Using Normalized Maximum Eigengap](https://drive.google.com/file/d/1CdEJPrpW6pRCObrppcZnw0_hRwWIHxi8/view?usp=sharing)
 
 [1] [SPEAKER DIARIZATION USING DEEP NEURAL NETWORK EMBEDDINGS](https://www.danielpovey.com/files/2017_icassp_diarization_embeddings.pdf) - 9.9% DER on NIST SRE 2000 CH 
