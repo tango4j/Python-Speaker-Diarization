@@ -31,7 +31,7 @@ Track 2: System VAD (Full DH2019 Dev set)
 Collar 0.25, No overlap for evaluation  
 Track 1: Oracle VAD
 | System and Error | DER = Speaker Error: Before Reseg | DER = Speaker Error: After Reseg|
-| --------------------------------------------------------------- |:------:|:------:|:--------:|:-----:|
+| -------------------------------------------------------------|:------:|:------:|
 | Callhome Diarization Xvector Model [6]                       | 8.39%  | -      |
 | __Auto-Tuning NMESC [A1]__                                   | 7.24%  | -      |  
 
