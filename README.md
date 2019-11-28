@@ -29,7 +29,7 @@ Collar 0.25, No overlap for evaluation
 | Google, 2019, Fully Supervised [4]                          | -      | -      | 7.6%     | -     |
 | __Auto-Tuning NMESC [A1]__                                  | 11.73% |   -    | 5.41%    | -     |   
 
-#### **2. DIHARD 2019 Dev Set**
+### **2. DIHARD 2019 Dev Set**
 192 Sessions  
 
 No collar for evalutation  
@@ -53,7 +53,7 @@ Full dev set
 
 
 
-### **AMI meeting corpora**
+### **3. AMI meeting corpora**
 
 Collar 0.25, No overlap for evaluation  
 Track 1: Oracle VAD (Full DH2019 Dev set) 
@@ -64,7 +64,7 @@ Track 1: Oracle VAD (Full DH2019 Dev set)
 | USC t2C01 (test-set-optimized threshold:  0.44)         | -      | -      | -        | -    |  
 
 
-#### **callhome American English (LDC97S42 + LDC97T14) Evaluation**
+#### **4. Callhome American English (LDC97S42 + LDC97T14) Evaluation**
 
 Collar 0.25, No overlap for evaluation  
 Track 1: Oracle VAD (Full DH2019 Dev set) 
@@ -85,7 +85,7 @@ Track 1: Oracle VAD (Full DH2019 Dev set)
 | __Google, 2018, Quan Wang, d-vector + Spectral Clustering [3]__| 12.48% | -      | 6.03%    | -    |
 | USC t2B02 (except thr is 0)                                    | 15.39% | -      | 3.9%     | -    |
 
-#### **NIST RT-03 CTS (LDC2007S10) Evaluation**
+### **5. NIST RT-03 CTS (LDC2007S10) Evaluation**
 
 Collar 0.25, No overlap for evaluation  
 Track 1: Oracle VAD (Full DH2019 Dev set) 
