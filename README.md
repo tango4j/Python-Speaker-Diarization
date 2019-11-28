@@ -51,8 +51,6 @@ Full dev set
 | USC t2D02_ahc_plda (_test-set opt._, thres -0.2)                       | 46.95% | 47.1% | 15.7% | 14.9% |
 | USC t2D03_spt_cos (_test-set opt._, RP thres 0.08 for cos. sim. value) | -      | -     | -     | -     |   
 
-
-
 ### **3. AMI meeting corpora**
 
 Collar 0.25, No overlap for evaluation  
@@ -63,11 +61,10 @@ Track 1: Oracle VAD (Full DH2019 Dev set)
 | USC t2B02 (test-set-optimized threshold: -0.09)         | -      | -      | -        | -    |
 | USC t2C01 (test-set-optimized threshold:  0.44)         | -      | -      | -        | -    |  
 
-
-#### **4. Callhome American English (LDC97S42 + LDC97T14) Evaluation**
+### **4. Callhome American English (LDC97S42 + LDC97T14) Evaluation**
 
 Collar 0.25, No overlap for evaluation  
-Track 1: Oracle VAD (Full DH2019 Dev set) 
+Track 1: Oracle VAD 
 
 - __CH-109__ (2-speaker subset, test condition: known number of speakers)  
 
@@ -88,14 +85,13 @@ Track 1: Oracle VAD (Full DH2019 Dev set)
 ### **5. NIST RT-03 CTS (LDC2007S10) Evaluation**
 
 Collar 0.25, No overlap for evaluation  
-Track 1: Oracle VAD (Full DH2019 Dev set) 
+Track 1: Oracle VAD 
 
 | System and Error | Total Error: Before Reseg | Total Error: After Reseg  | Speaker Error: Before Reseg | Speaker Error: After Reseg|
 | ---------------------------------------------------------------|:------:|:------:|:--------:|:----:|
 | __Google, 2018, Quan Wang, d-vector + Spectral Clustering [3]__| 12.30% | -      | 3.76%    | -    |
 | t2B02 (test-set-optimized threshold: -0.09)                | -      | -      | -        | -    |
 | t2C01 (test-set-optimized threshold:  0.44)                | -      | -      | -        | -    |  
-
 
 [A1] [Auto-Tuning Spectral Clustering for SpeakerDiarization Using Normalized Maximum Eigengap](https://drive.google.com/file/d/1CdEJPrpW6pRCObrppcZnw0_hRwWIHxi8/view?usp=sharing)
 
