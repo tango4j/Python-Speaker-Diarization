@@ -9,10 +9,10 @@ Python3 code for the IEEE SPL paper ["Auto-Tuning Spectral Clustering for Speake
 ## DER Leaderboards
 
 
-#### **1.NIST SRE 2000 CALLHOME Disk-8(LDC2001S97)**
+### **1.NIST SRE 2000 CALLHOME Disk-8(LDC2001S97)**
 
 Collar 0.25, No overlap for evaluation  
-## Track 1: Oracle VAD  
+#### Track 1: Oracle VAD  
 
 | System and Error | DER,Speaker Error: Before Reseg | DER,Speaker Error: After Reseg |
 | -------------------------------------------------------------|:------:|:------:|
@@ -20,7 +20,7 @@ Collar 0.25, No overlap for evaluation
 | __Auto-Tuning NMESC [A1]__                                   | 7.29%  | -      |  
 | __Auto-Tuning NMESC Implemented spectral_opt.py__            | 7.24%  | -      |   
 
-## Track 2: System VAD  
+#### Track 2: System VAD  
 
 | System and Error | Total Error: Before Reseg | Total Error: After Reseg  | Speaker Error: Before Reseg | Speaker Error: After Reseg|
 | ------------------------------------------------------------|:------:|:------:|:--------:|:-----:|
@@ -35,7 +35,7 @@ Collar 0.25, No overlap for evaluation
 No collar for evalutation  
 Overlap regions are also evaluated  
   
-## Track 1: Oracle VAD (Full DH2019 Dev set) 
+#### Track 1: Oracle VAD (Full DH2019 Dev set) 
 Full dev set  
   
 | System and Error | Total Error: Before Reseg | Total Error: After Reseg  | Speaker Error: Before Reseg | Speaker Error: After Reseg|
@@ -43,7 +43,7 @@ Full dev set
 | __DiHard 2019 Baseline (JHU), (t1, test-set_opt, thres -0.03)__           | 24.24% | -      | 13.5%   | -     |
 | USC t2D02_ahc_plda (_test-set opt._, thres +0.07)                         | 30.02% | 36.97% | 19.1%   | 16.1% |
 
-## Track 2: System VAD (Full DH2019 Dev set)  
+#### Track 2: System VAD (Full DH2019 Dev set)  
 
 | System and Error | Total Error: Before Reseg | Total Error: After Reseg  | Speaker Error: Before Reseg | Speaker Error: After Reseg|
 | ---------------------------------------------------------------|:------:|:------:|:--------:|:----:|
