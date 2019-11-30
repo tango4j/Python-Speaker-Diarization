@@ -302,6 +302,16 @@ def gc_thres_min_gc(mat, max_n, n_list):
 
     return X_conn_from_dist, p_neighbors
 
+def scp2dict(path):
+    t_list = open(path)
+    out_dict = {}
+    for line in t_list:
+        key = line.strip().split()[0]
+        val = line.strip().split()[1]
+        if key not in out_dict:
+            out_dict[key] = val
+    return out_dict
+
 def checkOutput(key, seg_list, Yk):
     if len(seg_list) != Yk.shape[0]:
         print(idx+1, "Segments file length mismatch -key:", key, len(seg_list), Yk.shape[0])
@@ -427,25 +437,24 @@ class GraphSpectralClusteringClass(object):
             X_conn_from_dist, rp_p_neighbors = gc_thres_min_gc(mat, max_N, p_neighbors_list)
         return X_conn_from_dist, float(rp_p_neighbors/mat.shape[0]), est_spk_n_dict[rp_p_neighbors][0], est_spk_n_dict[rp_p_neighbors][1]
     
-    @staticmethod
+    @staticmethod 
     def print_status_estNspk(idx, key, mat, threshold, est_num_of_spk, param):
         print(idx+1, " score_metric:", param.score_metric, 
                      " affinity matrix pruning - threshold: {:3.3f}".format(threshold),
                      " key:", key,"Est # spk: " + str(est_num_of_spk), 
                      " Max # spk:", param.max_speaker, 
                      " MAT size : ", mat.shape)
-    
-    @staticmethod
-    def print_status_givenNSPK(idx, key, mat, est_num_of_spk, param):
+    @staticmethod 
+    def print_status_givenNspk(idx, key, mat, rp_threshold, est_num_of_spk, param):
         print(idx+1, " score_metric:", param.score_metric,
-                     " Rank based pruning - RP threshold:", rp_threshold ,
+                     " Rank based pruning - RP threshold: {}:4.4f".format(rp_threshold), 
                      " key:", key,
                      " Given Number of Speakers (reco2num_spk): " + str(est_num_of_spk), 
                      " MAT size : ", mat.shape)
 
     def COSclustering(self, idx, key, mat, param):
         X_dist_raw = mat
-
+        rp_threshold = param.threshold
         if param.spt_est_thres == "EigRatio":
             # param.sparse_search = False
             X_conn_from_dist, rp_threshold, est_num_of_spk, lambdas = self.NMEanalysis(mat, param.max_speaker, max_rp_threshold=0.250, sparse_search=param.sparse_search)
@@ -492,11 +501,11 @@ class GraphSpectralClusteringClass(object):
 
         '''
         if param.reco2num_spk != 'None': 
-            est_num_of_spk = int(reco2num_dict[key])
+            est_num_of_spk = int(self.reco2num_dict[key])
             ### Use the given number of speakers
             est_num_of_spk = min(est_num_of_spk, param.max_speaker) 
             _, lambdas, lambda_gap_list = estimate_num_of_spkrs(X_conn_from_dist, param.max_speaker)
-            self.print_status_givenNspk(idx, key, mat, est_num_of_spk, param)
+            self.print_status_givenNspk(idx, key, mat, rp_threshold, est_num_of_spk, param)
 
         else: 
             ### Estimate the number of speakers in the given session
@@ -526,7 +535,7 @@ class GraphSpectralClusteringClass(object):
 
         if param.reco2num_spk != 'None': 
             ### Use the given number of speakers
-            est_num_of_spk = int(reco2num_dict[key])
+            est_num_of_spk = int(self.reco2num_dict[key])
             self.print_status_givenNspk(self, idx, key, mat, est_num_of_spk, param)
 
         else: 
