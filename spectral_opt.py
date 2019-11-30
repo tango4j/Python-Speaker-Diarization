@@ -447,7 +447,7 @@ class GraphSpectralClusteringClass(object):
     @staticmethod 
     def print_status_givenNspk(idx, key, mat, rp_threshold, est_num_of_spk, param):
         print(idx+1, " score_metric:", param.score_metric,
-                     " Rank based pruning - RP threshold: {}:4.4f".format(rp_threshold), 
+                     " Rank based pruning - RP threshold: {:4.4f}".format(rp_threshold), 
                      " key:", key,
                      " Given Number of Speakers (reco2num_spk): " + str(est_num_of_spk), 
                      " MAT size : ", mat.shape)
