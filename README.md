@@ -1,5 +1,11 @@
 
-# Auto Tuning Spectral Clustering for SpeakerDiarization Using Normalized Maximum Eigengap
+# Python Speaker Diarization, Speaker Diarization Spectral Clustering
+
+* This repository deals with python speaker diarization, especially speaker clustering.
+* [Kaldi](https://kaldi-asr.org/doc/about.html) is required to fully perform the speaker diarization task.
+
+
+## Auto Tuning Spectral Clustering for SpeakerDiarization Using Normalized Maximum Eigengap
 
 <img src="https://github.com/tango4j/Auto-Tuning-Spectral-Clustering/blob/master/pics/adj_mat.png" width="40%" height="40%">
 <img src="https://github.com/tango4j/Auto-Tuning-Spectral-Clustering/blob/master/pics/gp_vs_nme.png" width="40%" height="40%">  
@@ -10,7 +16,7 @@
 
 ## Features of Auto-tuning NME-SC method
 
-Auto-tuning NME-SC poposed method - 
+Auto-tuning NME-SC poposed method - g
 * does not need to be tuned on dev-set. (Unlike PLDA-AHC)
 * Only requires speaker embedding. (No PLDA or supervised method for distance measuring) 
 * also estimates the number of speakers in the given session. 
