@@ -1,5 +1,7 @@
 
-# Python Speaker Diarization, Speaker Diarization Spectral Clustering
+# Python Speaker Diarization
+# Spectral Clustering Python
+# Speaker Diarization Spectral Clustering
 
 * This repository deals with python speaker diarization, especially speaker clustering.
 * [Kaldi](https://kaldi-asr.org/doc/about.html) is required to fully perform the speaker diarization task.
