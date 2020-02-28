@@ -1,4 +1,4 @@
-export KALDI_ROOT="/home/inctrl/kaldi"
+export KALDI_ROOT="~/kaldi"
 export DIAR_PWD=$KALDI_ROOT/egs/callhome_diarization/v1 
 export PATH=$DIAR_PWD/utils:$KALDI_ROOT/tools/openfst/bin:$KALDI_ROOT/tools/sph2pipe_v2.5:$KALDI_ROOT/tools/sctk/bin:$DIAR_PWD:$PATH
 export PYTHONPATH=$KALDI_ROOT/egs/wsj/s5/steps/libs:$PYTHONPATH

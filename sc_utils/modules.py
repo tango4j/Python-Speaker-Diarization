@@ -4,6 +4,7 @@ import os
 from subprocess import Popen, PIPE
 import time
 import datetime
+import ipdb
 from sklearn.utils import shuffle
 
 def noremDiv(nu, de):
@@ -92,11 +93,13 @@ def unison_shuffled_copies(a, b):
     return a[p], b[p]
 
 def unison_shuffled_copies_three(amat, bmat, slmat):
+    ipdb.set_trace()
     assert len(amat) == len(bmat) and len(bmat) == len(slmat)
     pmat = np.random.permutation(len(amat))
     return amat[pmat], bmat[pmat], slmat[pmat]
 
 def unison_numpy_shuffled(amat, bmat, slmat):
+    # ipdb.set_trace()
     assert len(amat) == len(bmat) and len(bmat) == len(slmat)
     amat, bmat, slmat = shuffle(amat, bmat, slmat)
     return amat, bmat, slmat

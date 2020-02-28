@@ -27,8 +27,8 @@ embedding_scp='None'
 
 echo "$0 $@"  # Print the command line for logging
 
-if [ -f path.sh ]; then . ./path.sh; fi
-. parse_options.sh || exit 1;
+#if [ -f path.sh ]; then . ./path.sh; fi
+#. parse_options.sh || exit 1;
 
 
 if [ $# != 2 ]; then
@@ -69,11 +69,11 @@ done
 cp $srcdir/spk2utt $dir/tmp/
 cp $srcdir/utt2spk $dir/tmp/
 cp $srcdir/segments $dir/tmp/
-utils/fix_data_dir.sh $dir/tmp > /dev/null
+#utils/fix_data_dir.sh $dir/tmp > /dev/null
 
 
-sdata=$dir/tmp/split$nj;
-utils/split_data.sh $dir/tmp $nj || exit 1;
+#sdata=$dir/tmp/split$nj;
+#utils/split_data.sh $dir/tmp $nj || exit 1;
 
 # Set various variables.
 mkdir -p $dir/log
@@ -114,7 +114,7 @@ python spectral_opt.py --distance_score_file $DISTANCE_SCORE_FILE \
 
 if [ $stage -le 2 ]; then
   echo "$0: computing RTTM"
-  diarization/make_rttm.py $srcdir/segments $dir/labels $dir/rttm || exit 1;
+  make_rttm.py $srcdir/segments $dir/labels $dir/rttm || exit 1;
   echo "RTTM calculation was successful. "
 fi
 
