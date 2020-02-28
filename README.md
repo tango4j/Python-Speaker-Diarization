@@ -1,108 +1,290 @@
-# This repo is under construction 
 
-Please email taejinpa@usc.edu if you have any question.
+# Auto Tuning Spectral Clustering for SpeakerDiarization Using Normalized Maximum Eigengap
 
-## Auto Tuning Spectral Clustering
+<img src="https://github.com/tango4j/Auto-Tuning-Spectral-Clustering/blob/master/pics/adj_mat.png" width="40%" height="40%">
+<img src="https://github.com/tango4j/Auto-Tuning-Spectral-Clustering/blob/master/pics/gp_vs_nme.png" width="40%" height="40%">  
 
-Python3 code for the IEEE SPL paper ["Auto-Tuning Spectral Clustering for SpeakerDiarization Using Normalized Maximum Eigengap"](https://drive.google.com/file/d/1CdEJPrpW6pRCObrppcZnw0_hRwWIHxi8/view?usp=sharing)
+* Code for the IEEE Signal Processing Letters (SPL) paper ["Auto-Tuning Spectral Clustering for SpeakerDiarization Using Normalized Maximum Eigengap"](https://drive.google.com/file/d/1CdEJPrpW6pRCObrppcZnw0_hRwWIHxi8/view?usp=sharing)
+* Spectral Clustering with auto tuning approach for speaker diarization tasks.
+* Based on Kaldi binaries, python and bash script 
 
-## DER Leaderboards
+## Features of Auto-tuning NME-SC method
+
+Auto-tuning NME-SC poposed method - 
+* does not need to be tuned on dev-set. (Unlike PLDA-AHC)
+* Only requires speaker embedding. (No PLDA or supervised method for distance measuring) 
+* also estimates the number of speakers in the given session. 
+* shows better performance than AHC+PLDA method in general. (See the below table)
+
+## Performance Table  
+
+* All the results are based on X-vector speaker embedding from [[1]](https://kaldi-asr.org/models/m6)  
+* Cosine distance (COS) is used for distance measure. [[2]](https://github.com/tango4j/Auto-Tuning-Spectral-Clustering/blob/master/2019_SPL_ATNMESC_tjp.pdf)
+
+### Track 1: Oracle VAD  
+
+| System | CALLHOME | CHAES-eval | CH109 | RT03(SW) | 
+| ----------------------------------------------|:---------:|:------:|:--------:|:--------:| 
+| Callhome Diarization Xvector Model[1]         | 8.39%     | 24.27% |  9.72% | 1.73% |
+| Spectral Clustering COS+B-SC                  | 8.78%     | 4.4%   |  2.25% | __0.88%__  |   
+| __Auto-Tuning COS+NME-SC__                    | 7.29%     | 2.48%  |  2.63% | 2.21% |
+| __Auto-Tuning COS+NME-SC Sparse-Search-20__   | __7.24%__ | __2.48%__ | __2.00%__ | 0.92% |
+
+### Track 2: System VAD  
+
+- Based on the [ASpIRE SAD Model](https://kaldi-asr.org/models/m1) to get SAD output.
+- The performance is: Speaker Error(%) ( Total DER(%) )
+
+| System | CALLHOME | CHAES-eval | CH109 | RT03(SW) | 
+| ----------------------------------------------|:--------------:|:-------------:|:------------:|:-------------:| 
+| Callhome Diarization Xvector Model[1]| 6.64% <br> (12.96%) | 1.45% <br> (5.52%) | 2.6% <br> (6.89%) | 0.99% <br> (3.53%) |
+| Spectral Clustering COS+B-SC[2] | 6.91% <br> (13.23%) | 1.00% <br> (5.07%) | 1.46% <br> (5.75%)| **0.56% <br> (3.1%)** |   
+| __Auto-Tuning COS+NME-SC__[2]   | 5.41% <br> (11.73%) | 0.97% <br> (5.04%) | 1.32% <br> (5.61%)| 0.59% <br> (3.13%) | 
+| __Auto-Tuning COS+NMME-SC Sparse-Search-20__ | **5.41% <br> (11.73%)** | **0.97% <br> (5.04%)** | **1.32% <br> (5.61%)** | 0.59% <br> (3.13%) | 
+
+### Datasets
+
+CALLHOME NIST SRE 2000 (LDC2001S97):  
+CALLHOME American English Subset (CHAES) (LDC97S42):
+CH-109 (LDC97S42): 
+RT03 (LDC2007S10) : 
+
+### Reference
+
+[1] [Callhome Diarization Xvector Model](https://kaldi-asr.org/models/m6)  
+[2] Tae Jin Park et. al., [Auto Tuning Spectral Clustering for SpeakerDiarization Using Normalized Maximum Eigengap](https://github.com/tango4j/Auto-Tuning-Spectral-Clustering/blob/master/2019_SPL_ATNMESC_tjp.pdf), IEEE Singal Processing Letters, 2019
 
 
-### **1.NIST SRE 2000 CALLHOME Disk-8(LDC2001S97)**
+## Getting Started
 
-Collar 0.25, No overlap for evaluation  
-#### Track 1: Oracle VAD  
+### TLDR; One-click demo script
 
-| System and Error | DER,Speaker Error: Before Reseg | DER,Speaker Error: After Reseg |
-| -------------------------------------------------------------|:------:|:------:|
-| Callhome Diarization Xvector Model [6]                       | 8.39%  | -      |
-| __Auto-Tuning NMESC [A1]__                                   | 7.29%  | -      |  
-| __Auto-Tuning NMESC Implemented spectral_opt.py__            | 7.24%  | -      |   
+* [**virtualenv**](https://docs.python-guide.org/dev/virtualenvs/) should be installed on your machine.
+* _run_demo_clustering.sh_ installs a virtualenv and runs spectral a clustering example.
+* This script runs two utterances from [CALLHOME](https://catalog.ldc.upenn.edu/LDC2001S97) dataset with precomputed segment files and affinity matrices in ./sample_CH_xvector folder.
 
-#### Track 2: System VAD  
+```bash
+source run_demo_clustering.sh
+```
+### Prerequisites
 
-| System and Error | Total Error: Before Reseg | Total Error: After Reseg  | Speaker Error: Before Reseg | Speaker Error: After Reseg|
-| ------------------------------------------------------------|:------:|:------:|:--------:|:-----:|
-| JHU, 2017, Garcia-Romero [1] (t1, Oracle SAD)               |        | -      | 12.8 %   | 9.9%  |
-| Google, 2018, Quan Wang, d-vector + Spectral Clustering [3] | 18.8%  | -      | 12.0%    | -     |
-| Google, 2019, Fully Supervised [4]                          | -      | -      | 7.6%     | -     |
-| __Auto-Tuning NMESC [A1]__                                  | 11.73% |   -    | 5.41%    | -     |   
+* This repo is based on python 3.7.
+* The mainly required python3 libraries:
+```
+joblib==0.14.0
+numpy==1.17.4
+scikit-learn==0.22
+scipy==1.3.3
+kaldi_io==0.9.1
+```
+* [Kaldi](https://kaldi-asr.org/doc/about.html) is required to reproduce the numbers in the paper. Go to [Kaldi install](http://jrmeyer.github.io/asr/2016/01/26/Installing-Kaldi.html) to install Kaldi software.
+* [Kaldi](https://kaldi-asr.org/doc/about.html) should  be installed in your home folder `~/kaldi` to be successfully loaded.
+* You can still run the clustering algorithm without [Kaldi](http://jrmeyer.github.io/asr/2016/01/26/Installing-Kaldi.html) by saving your affinity matrix into .npy.
 
-### **2. DIHARD 2019 Dev Set**
-192 Sessions  
+### Installing
 
-No collar for evalutation  
-Overlap regions are also evaluated  
+You have to first have [**virtualenv**](https://docs.python-guide.org/dev/virtualenvs/) installed on your machine. Install [**virtualenv**](https://docs.python-guide.org/dev/virtualenvs/) with the following command:
+```
+sudo pip3 install virtualenv 
+```
+If you installed virtualenv, run the "install_venv.sh" script to make a virtual-env.
+```
+source install_venv.sh
+```
+This command will create a folder named "env_nmesc".
+
+
+### Usage Example
+
+You need to prepare the followings:
+
+1. **Segmentation files** in Kaldi style format:  
+<segment_id> <utt_id> <start_time> <end_time>
+
+ex) segments
+```
+iaaa-00000-00327-00000000-00000150 iaaa 0 1.5
+iaaa-00000-00327-00000075-00000225 iaaa 0.75 2.25
+iaaa-00000-00327-00000150-00000300 iaaa 1.5 3
+...
+iafq-00000-00272-00000000-00000150 iafq 0 1.5
+iafq-00000-00272-00000075-00000225 iafq 0.75 2.25
+iafq-00000-00272-00000150-00000272 iafq 1.5 2.72
+```
+3. **Affinity matrix files** in Kaldi scp/ark format: Each affinity matrix file should be N by N square matrix.
+2. **Speaker embedding files** (optional): If you don't have affinity matrix, you can calculate cosine similarity ark files using _./sc_utils/score_embedding.sh_ 
+
+#### Running the python code with arguments:
+```bash
+python spectral_opt.py --distance_score_file $DISTANCE_SCORE_FILE \
+                       --threshold $threshold \
+                       --score-metric $score_metric \
+                       --max_speaker $max_speaker \
+                       --spt_est_thres $spt_est_thres \
+                       --segment_file_input_path $SEGMENT_FILE_INPUT_PATH \
+                       --spk_labels_out_path $SPK_LABELS_OUT_PATH \
+                       --reco2num_spk $reco2num_spk 
+```
+
+#### Arguments:
+
+* **distance_score_file**: A list of affinity matrix files.  
+```
+# If you want to use kaldi .ark score file as an affinity matrix
+DISTANCE_SCORE_FILE=$PWD/sample_CH_xvector/cos_scores/scores.scp
+
+# If you want to use .npy numpy file as an affinity matrix
+DISTANCE_SCORE_FILE=$PWD/sample_CH_xvector/cos_scores/scores.txt
+```
+Two options are available:  
+
+(1) scores.scp: Kaldi style scp file that contains the absolute path to .ark files and its binary address. Space separted \<utt_id\> and \<path\>.
+
+ex) scores.scp
+```
+iaaa /path/sample_CH_xvector/cos_scores/scores.1.ark:5
+iafq /path/sample_CH_xvector/cos_scores/scores.1.ark:23129
+...
+```
+
+(2) scores.txt: List of <utt_id> and the absolute path to .npy files.  
+ex) scores.txt
+```
+iaaa /path/sample_CH_xvector/cos_scores/iaaa.npy
+iafq /path/sample_CH_xvector/cos_scores/iafq.npy
+...
+```
+* **score-metric**: Use 'cos' to apply for affinity matrix based on cosine similarity.  
+ex) 
+```bash
+score_metric='cos'
+```
+
+* **max_speaker**: If you do not provide oracle number of speakers (reco2num_spk), the estimated number of speakers is capped by _max_speaker_. Default is 8.
+```bash
+max_speaker=8
+```
+* **threshold**: Manually setup a threshold. We apply this threshold for all utterances. This should be setup in conjuction with **spt_est_thres**.
+ex) 
+```bash
+threshold=0.05
+```
+
+* **spt_est_thres**:
+spt_est_thres $spt_est_thres \
+```bash
+# You can specify a threshold.
+spt_est_thres='None'
+threshold=0.05 
+
+# Or you can use NMESC in the paper to estimate the threshold.
+spt_est_thres='NMESC'
+threshold='None'
+
+# Or you can specify different threshold for each utterance.
+spt_est_thres="thres_utts.txt"
+threshold='None'
+```
+thres_utts.txt has a format as follows:
+<utt_id> <threshold>  
   
-#### Track 1: Oracle VAD (Full DH2019 Dev set) 
-Full dev set  
-  
-| System and Error | Total Error: Before Reseg | Total Error: After Reseg  | Speaker Error: Before Reseg | Speaker Error: After Reseg|
-| ---------------------------------------------------------------|:------:|:------:|:--------:|:----:|
-| __DiHard 2019 Baseline (JHU), (t1, test-set_opt, thres -0.03)__           | 24.24% | -      | 13.5%   | -     |
-| USC t2D02_ahc_plda (_test-set opt._, thres +0.07)                         | 30.02% | 36.97% | 19.1%   | 16.1% |
+ex) thres_utts.txt
+```
+iaaa 0.105
+iafq 0.215
+...
+```
 
-#### Track 2: System VAD (Full DH2019 Dev set)  
+* **segment_file_input_path**: "segments" file in Kaldi format. This file is also necessary for making rttm file and calculating DER.
+```bash
+segment_file_input_path=$PWD/sample_CH_xvector/xvector_embeddings/segments
+```
+ex) segments
+```
+iaaa-00000-00327-00000000-00000150 iaaa 0 1.5
+iaaa-00000-00327-00000075-00000225 iaaa 0.75 2.25
+iaaa-00000-00327-00000150-00000300 iaaa 1.5 3
+...
+iafq-00000-00272-00000000-00000150 iafq 0 1.5
+iafq-00000-00272-00000075-00000225 iafq 0.75 2.25
+iafq-00000-00272-00000150-00000272 iafq 1.5 2.72
+```
 
-| System and Error | Total Error: Before Reseg | Total Error: After Reseg  | Speaker Error: Before Reseg | Speaker Error: After Reseg|
-| ---------------------------------------------------------------|:------:|:------:|:--------:|:----:|
-| __t2:DiHard 2019 Baseline (JHU) (t2, system SAD)__                     | -      | -     | -     | -     |
-| USC t2D02_ahc_plda (_test-set opt._, thres -0.2)                       | 46.95% | 47.1% | 15.7% | 14.9% |
-| USC t2D03_spt_cos (_test-set opt._, RP thres 0.08 for cos. sim. value) | -      | -     | -     | -     |   
+* **reco2num_spk**: A list of oracle number of speakers. Default is 'None'.
+reco2num_spk $reco2num_spk
+```bash
+reco2num_spk='None'
+reco2num_spk='oracle_num_of_spk.txt'
+```
+In the text file, you must include <utt_id> and <oracle_number_of_speakers>   
+ex) oracle_num_of_spk.txt
+```
+iaaa 2
+iafq 2
+iabe 4
+iadf 6
+...
+```
 
-### **3. AMI meeting corpora**
+### Cosine similarity calculator script
 
-Collar 0.25, No overlap for evaluation  
-Track 1: Oracle VAD (Full DH2019 Dev set) 
-
-| System and Error | Total Error: Before Reseg | Total Error: After Reseg  | Speaker Error: Before Reseg | Speaker Error: After Reseg|
-| ---------------------------------------------------------------|:------:|:------:|:--------:|:----:|
-| USC t2B02 (test-set-optimized threshold: -0.09)         | -      | -      | -        | -    |
-| USC t2C01 (test-set-optimized threshold:  0.44)         | -      | -      | -        | -    |  
-
-### **4. Callhome American English (LDC97S42 + LDC97T14) Evaluation**
-
-Collar 0.25, No overlap for evaluation  
-Track 1: Oracle VAD 
-
-- __CH-109__ (2-speaker subset, test condition: known number of speakers)  
-
-| System and Error | Total Error: Before Reseg | Total Error: After Reseg  | Speaker Error: Before Reseg | Speaker Error: After Reseg|
-| ---------------------------------------------------------------|:------:|:------:|:------:|:-----:|
-| __Google, 2018, Quan Wang, d-vector + Spectral Clustering [3]__| 12.54% | -      | 5.97%  | -     |
-| __IBM, 2017, Zbyněk Zajíc [5]__                                | -      | -      | 7.84%  | -     |
-| t2D02_spt_plda (KNOWN # of spks, LLR th 0.0 for raw PLDA)      | 5.61%  | 5.41%  | 1.3%   | 0.7%  |  
+#### Running the python code for cosine similarity calculation:
+```
+data_dir=$PWD/sample_CH_xvector
+pushd $PWD/sc_utils
+text_yellow_info "Starting Script: affinity_score.py"
+./score_embedding.sh --cmd "run.pl --mem 5G" \
+                     --score-metric $score_metric \
+                      $data_dir/xvector_embeddings \
+                      $data_dir/cos_scores 
+popd
+```
+* **cmd**: This is for following the kaldi style argument.
+* **score-metric**: Should be 'cos' for cosine similarity.
+```
+score_metric='cos'
+```
+* **\<src-embedding-dir\>**: Source embedding directory where xvector.scp and xvector.ark files are
+* **\<out-dir\>**: Output directory. This script will create scores.1.ark file and scores.scp
 
 
-- __CH-Eval__ (Eval set from corpora, speakers >= 2, test condition:unknown number of condition)  
+### Expected output result of one-click script
 
-| System and Error | Total Error: Before Reseg | Total Error: After Reseg  | Speaker Error: Before Reseg | Speaker Error: After Reseg|
-| ---------------------------------------------------------------|:------:|:------:|:--------:|:----:|
-| __Google, 2018, Quan Wang, d-vector + Spectral Clustering [3]__| 12.48% | -      | 6.03%    | -    |
-| USC t2B02 (except thr is 0)                                    | 15.39% | -      | 3.9%     | -    |
+```bash
+$ source run_demo_clustering.sh 
+=== [INFO] The python_envfolder exists: /.../Auto-Tuning-Spectral-Clustering/env_nmesc 
+=== [INFO] Cosine similariy scores exist: /.../Auto-Tuning-Spectral-Clustering/sample_CH_xvector/cos_scores 
+=== [INFO] Running Spectral Clustering with .npy input... 
+=== [INFO] .scp file and .ark files were provided
+Scanning eig_ratio of length [19] mat size [76] ...
+1  score_metric: cos  affinity matrix pruning - threshold: 0.105  key: iaaa Est # spk: 2  Max # spk: 8  MAT size :  (76, 76)
+Scanning eig_ratio of length [15] mat size [62] ...
+2  score_metric: cos  affinity matrix pruning - threshold: 0.194  key: iafq Est # spk: 2  Max # spk: 8  MAT size :  (62, 62)
+Method: Spectral Clustering has been finished 
+=== [INFO] Computing RTTM 
+=== [INFO] RTTM calculation was successful. 
+=== [INFO] NMESC auto-tuning | Total Err. (DER) -[ 0.32 % ] Speaker Err. [ 0.32 % ] 
+=== [INFO] .scp file and .ark files were provided
+1  score_metric: cos  affinity matrix pruning - threshold: 0.050  key: iaaa Est # spk: 2  Max # spk: 8  MAT size :  (76, 76)
+2  score_metric: cos  affinity matrix pruning - threshold: 0.050  key: iafq Est # spk: 5  Max # spk: 8  MAT size :  (62, 62)
+Method: Spectral Clustering has been finished 
+=== [INFO] Computing RTTM 
+=== [INFO] RTTM calculation was successful. 
+=== [INFO] Threshold 0.05 | Total Err. (DER) -[ 20.57 % ] Speaker Err. [ 20.57 % ] 
+Loading reco2num_spk file:  reco2num_spk
+=== [INFO] .scp file and .ark files were provided
+1  score_metric: cos  Rank based pruning - RP threshold: 0.0500  key: iaaa  Given Number of Speakers (reco2num_spk): 2  MAT size :  (76, 76)
+2  score_metric: cos  Rank based pruning - RP threshold: 0.0500  key: iafq  Given Number of Speakers (reco2num_spk): 2  MAT size :  (62, 62)
+Method: Spectral Clustering has been finished 
+=== [INFO] Computing RTTM 
+=== [INFO] RTTM calculation was successful. 
+=== [INFO] Known Num. Spk. | Total Err. (DER) -[ 0.15 % ] Speaker Err. [ 0.15 % ] 
 
-### **5. NIST RT-03 CTS (LDC2007S10) Evaluation**
+```
 
-Collar 0.25, No overlap for evaluation  
-Track 1: Oracle VAD 
+## Authors
 
-| System and Error | Total Error: Before Reseg | Total Error: After Reseg  | Speaker Error: Before Reseg | Speaker Error: After Reseg|
-| ---------------------------------------------------------------|:------:|:------:|:--------:|:----:|
-| __Google, 2018, Quan Wang, d-vector + Spectral Clustering [3]__| 12.30% | -      | 3.76%    | -    |
-| t2B02 (test-set-optimized threshold: -0.09)                | -      | -      | -        | -    |
-| t2C01 (test-set-optimized threshold:  0.44)                | -      | -      | -        | -    |  
-
-[A1] [Auto-Tuning Spectral Clustering for SpeakerDiarization Using Normalized Maximum Eigengap](https://drive.google.com/file/d/1CdEJPrpW6pRCObrppcZnw0_hRwWIHxi8/view?usp=sharing)
-
-[1] [SPEAKER DIARIZATION USING DEEP NEURAL NETWORK EMBEDDINGS](https://www.danielpovey.com/files/2017_icassp_diarization_embeddings.pdf) - 9.9% DER on NIST SRE 2000 CH 
-
-[2] [Priors for Speaker Counting and Diarization with AHC](https://engineering.jhu.edu/hltcoe/wp-content/uploads/sites/92/2016/10/Sell_McCree_Garcia-Romero_2016A.pdf) - Speaker prior method that is applied in [1]
-
-[3] [SPEAKER DIARIZATION WITH LSTM](https://arxiv.org/pdf/1710.10468.pdf) - Google's 2018 Result with 12.0% DER on NIST SRE 2000 CH
-
-[4] [FULLY SUPERVISED SPEAKER DIARIZATION](https://arxiv.org/pdf/1810.04719.pdf) - Google's latest result with 7.6% DER on NIST SRE 2000 CH (SoTA)
-
-[5] [Speaker Diarization Using Convolutional Neural Network for Statistics Accumulation Refinement](https://www.isca-speech.org/archive/Interspeech_2017/pdfs/0051.PDF) - IBM's diarization paper that is tested on Callhome American English (LDC97S42) with CH-109 subset(2-speaker subset).
-
-[6] [Kaldi-Callhome Diarization Xvector Model](https://david-ryan-snyder.github.io/2018/05/04/model_callhome_diarization_v2.html) 
+Tae Jin Park: inctrljinee@gmail.com, tango4j@gmail.com  
+Kyu J.  
+Manoj Kumar   
+Shrikanth Narayanan   
